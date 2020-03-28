@@ -6,7 +6,7 @@ class VideoPlayer {
     video : HTMLVideoElement = document.createElement('video')
     canvas : HTMLCanvasElement = document.createElement('canvas')
     context : CanvasRenderingContext2D
-    //gameObjects : Array = []
+    gameObjects : Array<GameObject> = []
 
     constructor(url) {
         this.initVideo(url)
@@ -27,13 +27,23 @@ class VideoPlayer {
         this.canvas.width = w
         this.canvas.height = h
         this.context = this.canvas.getContext('2d')
+        this.canvas.style.position = 'absolute'
+        this.canvas.style.left = '0px'
+        this.canvas.style.top = '0px'
         document.body.appendChild(this.canvas)
     }
 
     show() {
         this.context.drawImage(this.video, 0, 0, w, h)
+        this.gameObjects.forEach((gameObject) => {
+            gameObject.draw(this.context)
+            gameObject.update()
+        })
     }
 
+    addGameObject(gameObject) {
+        this.gameObjects.push(gameObject)
+    }
 
     start() {
         setInterval(() => {
@@ -44,5 +54,16 @@ class VideoPlayer {
     static init(url) {
         const videoPlayer : VideoPlayer = new VideoPlayer(url)
         videoPlayer.start()
+    }
+}
+
+class GameObject {
+
+    draw(context : CanvasRenderingContext2D) {
+
+    }
+
+    update() {
+
     }
 }
