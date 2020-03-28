@@ -12,6 +12,7 @@ class VideoPlayer {
     canvas : HTMLCanvasElement = document.createElement('canvas')
     context : CanvasRenderingContext2D
     gameObjects : Array<GameObject> = []
+    loaded : boolean = false
 
     constructor(url) {
         this.initVideo(url)
@@ -24,10 +25,13 @@ class VideoPlayer {
         this.video.style.position = 'absolute'
         this.video.style.left = '0px'
         this.video.style.top = '0px'
-        //document.body.appendChild(this.video)
+        document.body.appendChild(this.video)
         this.video.src = url
         this.video.autoplay = true
         this.video.style.display = 'none'
+        this.video.onload = () => {
+            this.loaded = true
+        }
     }
 
     initCanvas() {
@@ -64,6 +68,7 @@ class VideoPlayer {
     static create(url) {
         const videoPlayer : VideoPlayer = new VideoPlayer(url)
         videoPlayer.start()
+        return videoPlayer
     }
 }
 
