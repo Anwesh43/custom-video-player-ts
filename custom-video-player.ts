@@ -1,5 +1,10 @@
-const w : number = window.innerWidth
-const h : number = window.innerHeight
+var w : number = window.innerWidth
+var h : number = window.innerHeight
+
+window.onresize = () => {
+    w = window.innerWidth
+    h = window.innerHeight
+}
 
 class VideoPlayer {
 
@@ -71,4 +76,24 @@ class GameObject {
     update() {
 
     }
+}
+
+class ColorFilter extends GameObject {
+
+    alpha : number = 0.4
+
+    constructor(private color : string) {
+        super()
+    }
+
+    setAlpha(alpha : number) {
+        this.alpha = alpha
+    }
+
+    draw(context : CanvasRenderingContext2D) {
+        context.globalAlpha = this.alpha
+        context.fillStyle = this.color
+        context.fillRect(0, 0, w, h)
+    }
+
 }
