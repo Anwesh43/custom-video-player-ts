@@ -19,7 +19,9 @@ class VideoPlayer {
         this.video.style.position = 'absolute'
         this.video.style.left = '0px'
         this.video.style.top = '0px'
+        //document.body.appendChild(this.video)
         this.video.src = url
+        this.video.autoplay = true
         this.video.style.display = 'none'
     }
 
@@ -46,12 +48,15 @@ class VideoPlayer {
     }
 
     start() {
+        this.video.volume = 0
+        this.video.play()
+        this.video.loop = true
         setInterval(() => {
             this.show()
         }, 0)
     }
 
-    static init(url) {
+    static create(url) {
         const videoPlayer : VideoPlayer = new VideoPlayer(url)
         videoPlayer.start()
     }
