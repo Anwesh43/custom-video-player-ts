@@ -65,6 +65,14 @@ class VideoPlayer {
         }, 0)
     }
 
+    attachClickListener(cb) {
+        this.canvas.onmousedown = (event) => {
+            const x = event.offsetX
+            const y = event.offsetY
+            cb(x, y)
+        }
+    }
+
     static create(url) {
         const videoPlayer : VideoPlayer = new VideoPlayer(url)
         videoPlayer.start()
@@ -99,6 +107,7 @@ class ColorFilter extends GameObject {
         context.globalAlpha = this.alpha
         context.fillStyle = this.color
         context.fillRect(0, 0, w, h)
+        context.globalAlpha = 1
     }
 
 }
