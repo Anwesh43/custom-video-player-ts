@@ -6,8 +6,11 @@
     <script>
         const videoPlayer = VideoPlayer.create("http://localhost:8000/Santa-Cruz.mp4")
         videoPlayer.addGameObject(new ColorFilter("#673AB7"))
+        // videoPlayer.attachClickListener((x, y) => {
+        //     videoPlayer.addGameObject(new CrossObject(x, y, "white"))
+        // })
         videoPlayer.attachClickListener((x, y) => {
-            videoPlayer.addGameObject(new CrossObject(x, y, "white"))
+            videoPlayer.addGameObject(new CircleObject(x, y))
         })
     </script>
 </body>
