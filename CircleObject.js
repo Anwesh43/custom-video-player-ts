@@ -1,6 +1,6 @@
-const rFactor = 5
+const rFactor = 12
 const fixedR = Math.min(w, h) / rFactor
-const circleObjectDelay = 30
+const circleObjectDelay = 5
 const circleUpdateGap = 0.02
 
 class AnimatedScale {
@@ -33,6 +33,7 @@ class CircleObject extends GameObject {
     color
 
     constructor(x, y, color) {
+        super()
         this.x = x
         this.y = y
         this.color = color
@@ -44,7 +45,7 @@ class CircleObject extends GameObject {
         context.lineWidth = Math.min(w, h) / 90
         context.strokeStyle = this.color || "white"
         context.beginPath()
-        context.arc(this.x, this.y, fixedR * this.animatedScale.scale)
+        context.arc(this.x, this.y, fixedR * this.animatedScale.scale, 0, 2 * Math.PI)
         context.stroke()
     }
 
